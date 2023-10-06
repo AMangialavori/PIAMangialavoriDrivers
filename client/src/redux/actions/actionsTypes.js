@@ -1,0 +1,9 @@
+export const GET_DRIVERS = "GET_DRIVERS";
+export const GET_DRIVER_DETAIL = "GET_DRIVER_DETAIL";
+export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
+export const CLEAN_DETAIL = "CLEAN_DETAIL";
+export const GET_TEAMS = "GET_TEAMS";
+export const FILTERED_TEAMS = "FILTERED_TEAMS";
+export const FILTERED_ORIGIN = "FILTERED_ORIGIN";
+export const ALPHABETIC_ORDER = "ALPHABETIC_ORDER";
+export const DOB_ORDER = "DOB_ORDER";

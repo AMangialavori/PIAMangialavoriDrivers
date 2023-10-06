@@ -1,0 +1,42 @@
+.formContainer {
+  border: 1px solid black;
+  margin: 20px;
+}
+
+.submitButton {
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: black;
+  padding: 10px;
+  border: solid #39ff14 1px;
+  border-radius: 7px 7px 7px 7px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: #39ff14;
+}
+
+/* .submitButton:hover {
+  scale: 1.1;
+  border-color: #39ff14;
+  box-shadow: inset 0 0 10px #39ff14;
+} */
+
+/* .submitButton:disabled {
+  opacity: 0.3;
+  transition: transform 0.2s ease;
+}
+.submitButton:disabled:hover {
+  transform: translateX(100px);
+} */
+
+.submitButton:hover:not(:disabled) {
+  transform: scale(1.1);
+  border-color: #39ff14;
+  box-shadow: inset 0 0 10px #39ff14;
+}
+
+.submitButton:disabled:hover {
+  transform: translateX(100px);
+  opacity: 0.3;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}

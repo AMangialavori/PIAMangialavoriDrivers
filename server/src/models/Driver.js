@@ -1,12 +1,44 @@
-const { DataTypes } = require('sequelize');
-// Exportamos una funcion que define el modelo
-// Luego le injectamos la conexion a sequelize.
+const { DataTypes } = require("sequelize");
+
 module.exports = (sequelize) => {
-  // defino el modelo
-  sequelize.define('Driver', {
-    name: {
-      type: DataTypes.STRING,
+  // sequelize.query("CREATE SEQUENCE IF NOT EXISTS driver_id_seq START 508");
+
+  sequelize.define("Driver", {
+    id: {
+      type: DataTypes.UUID,
+      primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
+      // defaultValue: () => {
+      //   return sequelize.literal("nextval('driver_id_seq')");
+      // },
+    },
+    forename: {
+      type: DataTypes.STRING(15),
       allowNull: false,
+    },
+    surname: {
+      type: DataTypes.STRING(15),
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    image: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    nationality: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+    },
+    dob: {
+      type: DataTypes.STRING(10),
+      allowNull: false,
+    },
+    created: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
     },
   });
 };
