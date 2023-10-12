@@ -1,4 +1,5 @@
 import { useState } from "react";
+import style from "./SearchBar.module.css";
 
 const SearchBar = ({ setSearchName }) => {
   const [inputValue, setinputValue] = useState("");
@@ -13,10 +14,10 @@ const SearchBar = ({ setSearchName }) => {
   };
 
   return (
-    <div>
+    <div className={style.searchBar}>
       <input
         type="text"
-        placeholder="Ingresa el nombre del corredor"
+        placeholder="nombre del corredor"
         value={inputValue}
         onChange={handleOnChange}
       />

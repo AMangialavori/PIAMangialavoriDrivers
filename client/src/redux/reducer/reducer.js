@@ -8,6 +8,7 @@ import {
   FILTERED_ORIGIN,
   ALPHABETIC_ORDER,
   DOB_ORDER,
+  REMOVE_DRIVER,
 } from "../actions/actionsTypes";
 
 const initialState = {
@@ -37,6 +38,17 @@ const reducer = (state = initialState, { type, payload }) => {
         driver_detail: [],
       };
     }
+
+    case REMOVE_DRIVER: {
+      const removeDriver = state.driversCopy.filter(
+        (driver) => driver.id !== payload
+      );
+      return {
+        ...state,
+        drivers: removeDriver,
+        driversCopy: removeDriver,
+      };
+    }
     case SEARCH_BY_NAME:
       return {
         ...state,
@@ -47,12 +59,13 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         teams: payload,
       };
+
     case FILTERED_TEAMS:
       const filteredTeams = state.driversCopy.filter((driver) => {
         if (typeof driver.teams === "string") {
           const driverTeams = driver.teams
             .split(",")
-            .map((team) => team.trim());
+            .map((team) => team.trim()); //["Ferrari","Mercedes","Red Bull"]
           return driverTeams.includes(payload);
         }
       });
@@ -72,7 +85,7 @@ const reducer = (state = initialState, { type, payload }) => {
       };
 
     case ALPHABETIC_ORDER:
-      const abcOrder = [...state.drivers];
+      const abcOrder = [...state.drivers]; //crear copia del estado
       return {
         ...state,
         drivers:
@@ -80,6 +93,7 @@ const reducer = (state = initialState, { type, payload }) => {
             ? abcOrder.sort((a, b) => a.surname.localeCompare(b.surname))
             : abcOrder.sort((a, b) => b.surname.localeCompare(a.surname)),
       };
+    //localCompare: Método para ordenar alfabeticamente-->retorna 1(t) o 0
     case DOB_ORDER:
       const dobOrder = [...state.drivers];
       return {

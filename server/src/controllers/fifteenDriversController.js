@@ -1,11 +1,12 @@
 const axios = require("axios");
-const path = require("path");
+
 const { Team, Driver } = require("../db");
 const { Op } = require("sequelize");
 
 const URL = "http://localhost:5000/drivers";
 
-const defaultImage = path.join(__dirname, "../assets/logof1.png");
+const defaultImage =
+  "https://1000marcas.net/wp-content/uploads/2020/01/logo-F1.png";
 
 const fifteenDriversController = async (name) => {
   const dbDrivers = await Driver.findAll({
@@ -31,13 +32,10 @@ const fifteenDriversController = async (name) => {
     }));
   }
 
-  // if (dbDrivers.length) return dbDrivers;
-
   const response = await axios(`${URL}`);
   const apiDrivers = response.data;
   const filteredApiDrivers = apiDrivers.filter(
     (driver) => driver.name?.forename.toLowerCase() === name.toLowerCase()
-    // driver.name?.forename.toLowerCase().includes(name.toLowerCase())
   );
 
   const fifteenApiDrivers = filteredApiDrivers.slice(0, 15).map((driver) => ({

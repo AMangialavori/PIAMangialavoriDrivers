@@ -4,20 +4,20 @@ const validation = (state) => {
   if (state.forename.length < 3) {
     errors.forename = "El nombre debe tener mas de 3 carácteres";
   }
-  if (state.forename.length > 15) {
+  if (state.forename.length > 30) {
     errors.forename = "El nombre debe tener entre menos de 15 carácteres";
   }
-  if (!/^[A-Za-z]+$/.test(state.forename)) {
+  if (!/^[a-zA-Z\s]+$/.test(state.forename)) {
     errors.forename = "El nombre debe contener solo caracteres alfabéticos";
   }
 
   if (state.surname.length < 3) {
     errors.surname = "El apellido debe tener mas de 3 carácteres";
   }
-  if (state.surname.length > 15) {
+  if (state.surname.length > 30) {
     errors.surname = "El apellido debe tener entre menos de 15 carácteres";
   }
-  if (!/^[A-Za-z]+$/.test(state.surname)) {
+  if (!/^[a-zA-Z\s]+$/.test(state.surname)) {
     errors.surname = "El apellido debe contener solo caracteres alfabeticos";
   }
 
@@ -31,11 +31,7 @@ const validation = (state) => {
     errors.nationality =
       "La nacionalidad debe contener solo carácteres alfabéticos";
   }
-  if (
-    !/^\d{4}([\-/.])(0?[1-9]|1[1-2])\1(3[01]|[12][0-9]|0?[1-9])$/.test(
-      state.dob
-    )
-  ) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(state.dob)) {
     errors.dob = "El formato de la fecha debe ser aaaa-mm-dd";
   }
 
@@ -46,9 +42,9 @@ const validation = (state) => {
     errors.description =
       "La longitud de la descripción debe tener mas de 5 carácteres";
   }
-  if (state.description.length > 255) {
+  if (state.description.length > 3000) {
     errors.description =
-      "La longitud de la descripción debe tener menos de 255 carácteres";
+      "La longitud de la descripción debe tener menos de 500 palabras";
   }
   if (!/^[a-zA-Z ]+(,[a-zA-Z ]+)*$/.test(state.teams)) {
     errors.teams =

@@ -1,0 +1,31 @@
+/* Contenedor principal del Selector */
+.selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estilos para los elementos <select> */
+.select {
+  border: 3px solid black;
+  padding: 8px;
+  border-radius: 4px;
+  margin-right: 10px; /* Espacio entre los selectores */
+  font-size: 14px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Estilos para las opciones <option> */
+.option {
+  background-color: #fff;
+  color: #333;
+  justify-content: center;
+}
+
+/* Cambio de color de fondo al pasar el mouse sobre las opciones */
+.option:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}

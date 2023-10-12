@@ -2,6 +2,7 @@ const allDriversController = require("../controllers/allDriverscontroller");
 const driverDetailController = require("../controllers/driverDetailController");
 const createDriverController = require("../controllers/createDriverController");
 const fifteenDriversController = require("../controllers/fifteenDriversController");
+const deleteDriverController = require("../controllers/deleteDriverController");
 
 const getAllDriversHandler = async (req, res) => {
   const { name } = req.query;
@@ -47,8 +48,19 @@ const createDriverHandler = async (req, res) => {
   }
 };
 
+const deleteDriverHandler = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deleteDriver = await deleteDriverController(id);
+    res.status(200).json(deleteDriver);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 module.exports = {
   getAllDriversHandler,
   getdriverDetailHandler,
   createDriverHandler,
+  deleteDriverHandler,
 };

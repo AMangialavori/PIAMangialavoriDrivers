@@ -2,17 +2,23 @@ import "./App.css";
 
 import { Route, Routes } from "react-router-dom";
 
-import { LandingPage, Home, Form, Detail } from "./views";
+import { LandingPage, Home, Detail } from "./views";
+
+import { useState } from "react";
 
 function App() {
+  const [userName, setUserName] = useState("");
+
   return (
     <>
       <div className="App">
         <Routes>
-          <Route path="/" element={<LandingPage></LandingPage>} />
-          <Route path="/home" element={<Home></Home>} />
+          <Route
+            path="/"
+            element={<LandingPage setUserName={setUserName}></LandingPage>}
+          />
+          <Route path="/home" element={<Home userName={userName}></Home>} />
           <Route path="/detail/:id" element={<Detail></Detail>} />
-          <Route path="/form" element={<Form></Form>} />
         </Routes>
       </div>
     </>

@@ -23,13 +23,14 @@ const Pagination = ({ page, setPage, maximumPages }) => {
   };
   const onKeyDownHandler = (event) => {
     if (event.keyCode == 13) {
+      //enter
       setPage(parseInt(event.target.value));
       if (
         parseInt(event.target.value < 1) ||
         parseInt(event.target.value) > Math.ceil(maximumPages) ||
         isNaN(parseInt(event.target.value))
       ) {
-        setPage(1);
+        setPage(1); //se dirije a pag 1
         setInput(1);
       } else {
         setPage(parseInt(event.target.value));

@@ -11,34 +11,50 @@ const NavBar = ({
   setDobOrder,
   showAllDrivers,
   setShowAllDrivers,
+  userName,
+  openModalForm,
 }) => {
   const onClickHandler = () => {
-    setShowAllDrivers(false);
+    setShowAllDrivers(false); //vuelve a mostrar todos los drivers
+  };
+
+  const onClickNavLinkHandler = () => {
+    openModalForm();
+    setShowAllDrivers(true);
   };
 
   return (
-    <div className={style.mainContainer}>
-      {showAllDrivers && (
+    <div className={style.container}>
+      <div className={style.mainContainer}>
+        {showAllDrivers && (
+          <div>
+            <button onClick={onClickHandler}>Volver</button>
+          </div>
+        )}
         <div>
-          <button onClick={onClickHandler}>Volver</button>
+          <h2 className={style.h2}>Hola {userName}!</h2>
         </div>
-      )}
-      <div className={style.createLink}>
-        <NavLink className={style.navLink} to="/form">
-          Crear
-        </NavLink>
-      </div>
-      <div className={style.searchBar}>
-        <SearchBar setSearchName={setSearchName}></SearchBar>
-      </div>
-      <div className={style.selector}>
-        <Selector
-          setTeamSelector={setTeamSelector}
-          setOriginSelector={setOriginSelector}
-          setAbcOrder={setAbcOrder}
-          setDobOrder={setDobOrder}
-          setShowAllDrivers={setShowAllDrivers}
-        ></Selector>
+        <div className={style.createLink}>
+          <NavLink
+            className={style.createLink}
+            to="#"
+            onClick={onClickNavLinkHandler}
+          >
+            Crear
+          </NavLink>
+        </div>
+        <div className={style.searchBar}>
+          <SearchBar setSearchName={setSearchName}></SearchBar>
+        </div>
+        <div className={style.selector}>
+          <Selector
+            setTeamSelector={setTeamSelector}
+            setOriginSelector={setOriginSelector}
+            setAbcOrder={setAbcOrder}
+            setDobOrder={setDobOrder}
+            setShowAllDrivers={setShowAllDrivers}
+          ></Selector>
+        </div>
       </div>
     </div>
   );

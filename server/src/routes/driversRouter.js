@@ -3,6 +3,7 @@ const {
   getAllDriversHandler,
   getdriverDetailHandler,
   createDriverHandler,
+  deleteDriverHandler,
 } = require("../handlers/driversHandlers");
 
 const {
@@ -21,5 +22,7 @@ driversRouter.get(
 );
 
 driversRouter.post("/", validateCreateDriver, createDriverHandler);
+
+driversRouter.delete("/:id", deleteDriverHandler);
 
 module.exports = driversRouter;

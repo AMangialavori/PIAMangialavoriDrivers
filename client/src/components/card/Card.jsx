@@ -1,16 +1,25 @@
 import style from "./card.module.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-const Card = ({ id, name, dob, image, teams }) => {
+const Card = ({ id, name, dob, image, teams, created, onDelete }) => {
+  const onClickHandler = () => {
+    onDelete();
+  };
+
   return (
     <div className={style.cardContainer}>
-      <div className={style.imageContainer}>
-        <img className={style.characterImage} src={image} alt="" />
-        <Link to={`/detail/${id}`}>
+      <div>
+        <NavLink to={`/detail/${id}`}>
           <h2>{name}</h2>
-        </Link>
-        <h2>{dob}</h2>
-        <h2>{teams}</h2>
+        </NavLink>
+        <img className={style.characterImage} src={image} alt="" />
+        <h3>{dob}</h3>
+        <h3>{teams}</h3>
+      </div>
+      <div>
+        {created === "true" && (
+          <button onClick={onClickHandler}>Eliminar</button>
+        )}
       </div>
     </div>
   );

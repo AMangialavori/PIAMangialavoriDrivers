@@ -1,34 +1,50 @@
+.container {
+  position: relative;
+}
 .mainContainer {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background-color: #333; /* Color de fondo de la barra de navegación */
+  background-color: black;
   display: flex;
-  justify-content: space-between; /* Coloca los elementos a los extremos */
-  align-items: center; /* Centra verticalmente los elementos */
+  justify-content: space-between;
+  align-items: center;
   padding: 10px;
-}
-.createLink {
-  flex: 1;
-}
-.navLink {
   color: white;
+  border-bottom: 1px solid white;
+  box-shadow: 0 4px 6px rgba(224, 220, 220, 0.525);
 }
 
+/* Estilos para el botón "Volver" */
+.mainContainer button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-right: 10px; /* Espacio entre el botón y el siguiente elemento */
+}
+
+/* Estilos para el enlace "Crear" */
+.createLink {
+  text-decoration: none;
+  color: white;
+  margin-right: 10px; /* Espacio entre el enlace y el siguiente elemento */
+}
+
+/* Estilos para el título "Hola" */
+.h2 {
+  margin: 0;
+  margin-right: 10px; /* Espacio entre el título y el siguiente elemento */
+}
+
+/* Estilos para la barra de búsqueda */
 .searchBar {
-  flex: 1; /* Ocupa el espacio disponible en el centro */
-  text-align: center;
-}
-.selector {
-  flex: 1; /* Ocupa el espacio disponible en la derecha */
-  text-align: right;
+  margin-right: 10px; /* Espacio entre la barra de búsqueda y el siguiente elemento */
 }
 
-/* .mainContainer {
+/* Estilos para las etiquetas "selector" */
+.selector {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  border-radius: 10px;
-  border: 1px solid blueviolet;
-} */
+  align-items: center; /* Centra verticalmente los selectores */
+}

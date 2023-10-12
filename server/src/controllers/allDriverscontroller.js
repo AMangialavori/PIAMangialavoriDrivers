@@ -8,6 +8,7 @@ const URL = "http://localhost:5000/drivers";
 
 const defaultImage =
   "https://1000marcas.net/wp-content/uploads/2020/01/logo-F1.png";
+
 const allDriversController = async () => {
   const response = await axios(`${URL}`);
   const allDriversFromApi = response.data;
@@ -25,7 +26,7 @@ const allDriversController = async () => {
   }));
   const allDriversFromDB = await Driver.findAll({
     include: { model: Team, attributes: ["name"], through: { attributes: [] } },
-  });
+  }); // solo muestra nombre/s de escuderia/s
 
   if (!allDriversFromApi)
     throw new Error("Error de busqueda en la Api de todos los corredores");
@@ -44,7 +45,7 @@ const allDriversController = async () => {
     created: "true",
   }));
 
-  const allDrivers = [...mapDriversFromApi, ...mapDriversFromDB];
+  const allDrivers = [...mapDriversFromDB, ...mapDriversFromApi];
 
   return allDrivers;
 };

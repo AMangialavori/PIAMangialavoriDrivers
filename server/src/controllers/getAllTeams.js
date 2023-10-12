@@ -18,7 +18,7 @@ const getAllTeams = async () => {
     }
   });
 
-  const uniqueTeams = Array.from(teamsSet);
+  const uniqueTeams = Array.from(teamsSet); //obtengo un []
 
   // Guardar los equipos en la base de datos
   for (const teamName of uniqueTeams) {
@@ -30,21 +30,3 @@ const getAllTeams = async () => {
 };
 
 module.exports = getAllTeams;
-
-// const getTeamsfromDrivers = allTeamsFromApi.map((driver) => driver.teams);
-
-// const nameTeams = getTeamsfromDrivers.map((teamsString) => {
-//   if (typeof teamsString === "string") {
-//     return teamsString.split(", ");
-//   } else if (Array.isArray(teamsString)) {
-//     return teamsString.join(", ").split(", ");
-//   }
-// });
-
-// // getTeamsfromDrivers.forEach(async (team) => {
-// //   const allTeamsDB = await Team.findOrCreate({
-// //     where: { name: team },
-// //   });
-// //   return allTeamsDB;
-// // });
-// return nameTeams;

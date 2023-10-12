@@ -1,4 +1,5 @@
 const { Driver, Team } = require("../db");
+const { Op } = require("sequelize");
 
 const createDriverController = async (
   forename,
@@ -15,13 +16,9 @@ const createDriverController = async (
     throw new Error("Debes proporcionar al menos un equipo");
   }
 
-  // Dividir los nombres de los equipos como una cadena separada por comas
+  // Dividir los nombres de los equipos como una cadena separada por comas: ["Ferrari", " Mercedes", " Red Bull"]
   const teamNames = teams.split(",").map((teamName) => teamName.trim());
 
-  // Verificar que los nombres de los equipos sean válidos
-  if (!Array.isArray(teamNames) || teamNames.length === 0) {
-    throw new Error("Los nombres de los equipos no son válidos");
-  }
   const [createdDriver, create] = await Driver.findOrCreate({
     where: {
       forename,
@@ -32,19 +29,16 @@ const createDriverController = async (
       dob,
     },
   });
-  // const createdDriver = await Driver.create({
-  //   forename,
-  //   surname,
-  //   description,
-  //   image,
-  //   nationality,
-  //   dob,
-  // });
   const associatedTeams = [];
   // Buscar los equipos en la base de datos por nombre o crearlos si no existen
   for (const teamName of teamNames) {
     const [associatedTeam, created] = await Team.findOrCreate({
-      where: { name: teamName },
+      where: {
+        name: {
+          [Op.iLike]: teamName,
+        },
+      },
+      defaults: { name: teamName },
     });
 
     // Asociar los equipos al Driver recién creado

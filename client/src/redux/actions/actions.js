@@ -8,7 +8,9 @@ import {
   FILTERED_ORIGIN,
   ALPHABETIC_ORDER,
   DOB_ORDER,
+  REMOVE_DRIVER,
 } from "../actions/actionsTypes";
+
 import axios from "axios";
 
 export const getDrivers = () => {
@@ -71,16 +73,36 @@ export const cleanDetail = () => {
 export const getTeams = () => {
   return async function (dispatch) {
     try {
-      const result = await axios.get("http://localhost:3001/formula1/teams");
+      const result = await axios.get("http://localhost:3001/formula1/teams/db");
       const allTeams = result.data;
       if (!allTeams) throw new Error("There are not teams");
-
+      const allTeamsOrder = allTeams.sort((a, b) => a.localeCompare(b));
       dispatch({
         type: GET_TEAMS,
-        payload: allTeams,
+        payload: allTeamsOrder,
       });
     } catch (error) {
       alert("No se encontraron equipos");
+    }
+  };
+};
+
+//localCompare: Método para ordenar alfabeticamente-->retorna 1(t) o 0
+
+export const removeDriver = (id) => {
+  return async function (dispatch) {
+    try {
+      const result = await axios.delete(
+        `http://localhost:3001/formula1/drivers/${id}`
+      );
+      const driverDeleted = result.data;
+      if (!driverDeleted) throw new Error("Error al eliminar el driver");
+      dispatch({
+        type: REMOVE_DRIVER,
+        payload: id,
+      });
+    } catch (error) {
+      alert("Error al eliminar el driver");
     }
   };
 };
@@ -112,30 +134,3 @@ export const driversDobOrder = (dobOrder) => {
     payload: dobOrder,
   };
 };
-// export const getDrivers = () => {
-//   return async function (dispatch) {
-//     const URL = "http://localhost:3001/formula1/drivers";
-//     try {
-//       const result = await axios.get(`${URL}`);
-//       const allDrivers = result.data;
-//       if (!allDrivers) throw new Error("There are no drivers");
-//       const shuffledDrivers = shuffleArray(allDrivers);
-//       const selectedDrivers = shuffledDrivers.slice(0, 55);
-//       // console.log(selectedDrivers);
-//       dispatch({
-//         type: GET_DRIVERS,
-//         payload: selectedDrivers,
-//       });
-//     } catch (error) {
-//       return { error: error.message };
-//     }
-//   };
-// };
-
-// function shuffleArray(array) {
-//   for (let i = array.length - 1; i > 0; i--) {
-//     const j = Math.floor(Math.random() * (i + 1));
-//     [array[i], array[j]] = [array[j], array[i]];
-//   }
-//   return array;
-// }
