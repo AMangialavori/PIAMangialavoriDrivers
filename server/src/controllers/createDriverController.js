@@ -19,16 +19,27 @@ const createDriverController = async (
   // Dividir los nombres de los equipos como una cadena separada por comas: ["Ferrari", " Mercedes", " Red Bull"]
   const teamNames = teams.split(",").map((teamName) => teamName.trim());
 
-  const [createdDriver, create] = await Driver.findOrCreate({
+  const findDriver = await Driver.findOne({
     where: {
-      forename,
-      surname,
-      description,
-      image,
-      nationality,
+      forename: { [Op.iLike]: forename },
+      surname: { [Op.iLike]: surname },
       dob,
     },
   });
+
+  if (findDriver !== null) {
+    throw new Error("El driver ya existe");
+  }
+
+  const createdDriver = await Driver.create({
+    forename,
+    surname,
+    description,
+    image,
+    nationality,
+    dob,
+  });
+
   const associatedTeams = [];
   // Buscar los equipos en la base de datos por nombre o crearlos si no existen
   for (const teamName of teamNames) {
@@ -49,7 +60,6 @@ const createDriverController = async (
     createdDriver.dataValues.teams = associatedTeams.join(", ");
   }
 
-  if (!create) throw new Error("El driver ya existe");
   return createdDriver;
 };
 

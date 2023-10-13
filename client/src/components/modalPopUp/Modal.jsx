@@ -8,3 +8,5 @@ const Modal = ({ children, isOpenForm }) => {
   );
 };
 export default Modal;
+
+//componente genérico --> children: propiedad del atributo props
